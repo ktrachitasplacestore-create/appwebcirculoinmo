@@ -11,42 +11,28 @@
     <style>
         /* Estilos personalizados y variables de color */
         :root {
-            --bg-light: #FBF9F6; /* Beige claro */
-            --bg-dark: #1E1B26; /* Gris oscuro casi negro */
-            --text-light: #3D3B40;
-            --text-dark: #EAE8ED;
-            --primary-light: #D4AF37; /* Ambar/Oro */
-            --primary-dark: #F0C419;
-            --secondary-light: #E0BBE4; /* Lila claro */
-            --secondary-dark: #957DAD; /* Lila oscuro */
-            --card-light: #FFFFFF;
-            --card-dark: #2D2A37;
-            --border-light: #EAE8ED;
-            --border-dark: #4A4556;
+            --color-bg: #FBF9F6;
+            --color-text: #3D3B40;
+            --color-primary: #D4AF37;
+            --color-secondary: #E0BBE4;
+            --color-card: #FFFFFF;
+            --color-border: #EAE8ED;
         }
 
-        .dark-mode-bg { background-color: var(--bg-dark); }
-        .light-mode-bg { background-color: var(--bg-light); }
-        .dark-mode-text { color: var(--text-dark); }
-        .light-mode-text { color: var(--text-light); }
-        .dark-mode-card { background-color: var(--card-dark); }
-        .light-mode-card { background-color: var(--card-light); }
-        .dark-mode-border { border-color: var(--border-dark); }
-        .light-mode-border { border-color: var(--border-light); }
-        
-        .primary-bg { background-color: var(--primary-light); }
-        .dark .primary-bg { background-color: var(--primary-dark); }
-        .primary-text { color: var(--primary-light); }
-        .dark .primary-text { color: var(--primary-dark); }
-        
-        .secondary-bg { background-color: var(--secondary-light); }
-        .dark .secondary-bg { background-color: var(--secondary-dark); }
-        .secondary-text { color: var(--secondary-light); }
-        .dark .secondary-text { color: var(--secondary-dark); }
+        html.dark {
+            --color-bg: #1E1B26;
+            --color-text: #EAE8ED;
+            --color-primary: #F0C419;
+            --color-secondary: #957DAD;
+            --color-card: #2D2A37;
+            --color-border: #4A4556;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             transition: background-color 0.3s, color 0.3s;
+            background-color: var(--color-bg);
+            color: var(--color-text);
         }
 
         .tab-btn {
@@ -54,13 +40,8 @@
         }
 
         .tab-btn.active {
-            border-bottom-color: var(--primary-light);
-            color: var(--primary-light);
-        }
-
-        .dark .tab-btn.active {
-            border-bottom-color: var(--primary-dark);
-            color: var(--primary-dark);
+            border-bottom-color: var(--color-primary);
+            color: var(--color-primary);
         }
         
         .form-select, .form-input {
@@ -72,11 +53,8 @@
             to { transform: rotate(360deg); }
         }
         .loader {
-            border-top-color: var(--primary-light);
+            border-top-color: var(--color-primary);
             animation: spin 1s linear infinite;
-        }
-        .dark .loader {
-            border-top-color: var(--primary-dark);
         }
 
         /* Estilo del scrollbar */
@@ -84,28 +62,26 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: var(--bg-light);
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
+            background: var(--color-bg);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--border-dark);
+            background: var(--color-border);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+            background: var(--color-primary);
         }
+        .primary-text { color: var(--color-primary); }
     </style>
 </head>
-<body class="light-mode-bg light-mode-text">
+<body class="">
 
     <div id="app" class="min-h-screen flex flex-col">
         <!-- Header -->
-        <header class="light-mode-card dark:dark-mode-card shadow-md sticky top-0 z-10">
+        <header class="bg-[var(--color-card)] shadow-md sticky top-0 z-10">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-bold primary-text dark:primary-text">Inmoperfect</h1>
+                    <h1 class="text-2xl font-bold primary-text">Inmoperfect</h1>
                     <p class="text-sm text-gray-500 dark:text-gray-400">by Círculo Inmobiliario Secreto</p>
                 </div>
                 <!-- Dark Mode Toggle -->
@@ -113,7 +89,7 @@
                     <span class="text-sm mr-2">☀️</span>
                     <label for="dark-mode-toggle" class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:secondary-bg dark:peer-checked:secondary-bg"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[var(--color-secondary)]"></div>
                     </label>
                     <span class="text-sm ml-2">🌙</span>
                 </div>
@@ -123,7 +99,7 @@
         <!-- Main Content -->
         <main class="flex-grow container mx-auto p-4 md:p-8">
             <!-- Tabs -->
-            <div class="border-b light-mode-border dark:dark-mode-border mb-6">
+            <div class="border-b border-[var(--color-border)] mb-6">
                 <nav class="flex space-x-4" aria-label="Tabs">
                     <button id="tab-texto" class="tab-btn active text-lg font-medium px-1 py-2 border-b-2 border-transparent">Texto</button>
                     <button id="tab-imagen" class="tab-btn text-lg font-medium px-1 py-2 border-b-2 border-transparent">Imagen</button>
@@ -138,49 +114,49 @@
                 <div id="panel-texto" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Formulario de Texto -->
-                        <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                        <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                             <h2 class="text-xl font-semibold mb-4">Define tu necesidad de Texto</h2>
                             <form id="form-texto" class="space-y-4">
-                                <select id="texto-objetivo" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <select id="texto-objetivo" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="whatsapp">WhatsApp</option>
                                     <option value="email">Email</option>
                                     <option value="copy para Ads">Copy para Ads</option>
                                     <option value="copy para Reels">Copy para Reels</option>
                                 </select>
-                                <select id="texto-audiencia" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <select id="texto-audiencia" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="inversores">A Inversores</option>
                                     <option value="compradores">A Compradores</option>
                                     <option value="arrendatarios">A Arrendatarios</option>
                                 </select>
-                                <select id="texto-temperatura" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <select id="texto-temperatura" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="frio">Contacto en frío</option>
                                     <option value="tibio">Contacto en tibio / Seguimiento</option>
                                     <option value="caliente">Contacto caliente / Cierre</option>
                                 </select>
-                                <input type="text" id="texto-ciudad" placeholder="Ciudad (ej. CDMX, Monterrey, Guadalajara)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <input type="text" id="texto-inmueble" placeholder="Tipo de Inmueble (ej. Apartamento de lujo)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <textarea id="texto-caracteristicas" rows="3" placeholder="Características clave (ej. 3 hab, 2 baños, vistas al mar, piscina comunitaria...)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
-                                <button type="submit" class="w-full primary-bg dark:primary-bg text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt</button>
+                                <input type="text" id="texto-ciudad" placeholder="Ciudad (ej. CDMX, Monterrey, Guadalajara)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <input type="text" id="texto-inmueble" placeholder="Tipo de Inmueble (ej. Apartamento de lujo)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <textarea id="texto-caracteristicas" rows="3" placeholder="Características clave (ej. 3 hab, 2 baños, vistas al mar, piscina comunitaria...)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+                                <button type="submit" class="w-full bg-[var(--color-primary)] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt</button>
                             </form>
                         </div>
 
                         <!-- Resultado del Prompt y Gemini -->
                         <div class="space-y-6">
-                            <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                            <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                                 <h3 class="text-lg font-semibold mb-2">Prompt Generado</h3>
                                 <div class="relative">
-                                    <pre id="prompt-texto-resultado" class="whitespace-pre-wrap p-4 rounded-md light-mode-bg dark:dark-mode-bg min-h-[100px]"></pre>
+                                    <pre id="prompt-texto-resultado" class="whitespace-pre-wrap p-4 rounded-md bg-[var(--color-bg)] min-h-[100px]"></pre>
                                     <button onclick="copyToClipboard('prompt-texto-resultado')" class="absolute top-2 right-2 p-1.5 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                                     </button>
                                 </div>
                             </div>
-                            <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                            <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                                 <div class="flex justify-between items-center mb-2">
                                     <h3 class="text-lg font-semibold">Resultado con Gemini</h3>
-                                    <button id="btn-gemini-texto" class="secondary-bg dark:secondary-bg text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50" disabled>Generar Respuesta</button>
+                                    <button id="btn-gemini-texto" class="bg-[var(--color-secondary)] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50" disabled>Generar Respuesta</button>
                                 </div>
-                                <div id="gemini-texto-resultado-container" class="relative p-4 rounded-md light-mode-bg dark:dark-mode-bg min-h-[150px]">
+                                <div id="gemini-texto-resultado-container" class="relative p-4 rounded-md bg-[var(--color-bg)] min-h-[150px]">
                                     <div id="gemini-texto-loader" class="absolute inset-0 flex items-center justify-center hidden">
                                         <div class="loader w-8 h-8 border-4 border-gray-200 dark:border-gray-600 rounded-full"></div>
                                     </div>
@@ -195,44 +171,44 @@
                 <div id="panel-imagen" class="hidden space-y-6">
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Formulario de Imagen -->
-                        <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                        <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                             <h2 class="text-xl font-semibold mb-4">Crea una imagen de impacto</h2>
                             <form id="form-imagen" class="space-y-4">
-                                <input type="text" id="imagen-inmueble" placeholder="Tipo de espacio (ej. Cocina moderna, fachada de chalet...)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <select id="imagen-estilo" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <input type="text" id="imagen-inmueble" placeholder="Tipo de espacio (ej. Cocina moderna, fachada de chalet...)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <select id="imagen-estilo" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="fotorrealista">Fotorrealista</option>
                                     <option value="minimalista">Minimalista</option>
                                     <option value="calido y acogedor">Cálido y acogedor</option>
                                     <option value="futurista">Futurista</option>
                                     <option value="de lujo">De lujo</option>
                                 </select>
-                                <textarea id="imagen-elementos" rows="3" placeholder="Elementos clave (ej. Grandes ventanales, isla de mármol, vista al mar...)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
-                                <select id="imagen-iluminacion" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <textarea id="imagen-elementos" rows="3" placeholder="Elementos clave (ej. Grandes ventanales, isla de mármol, vista al mar...)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+                                <select id="imagen-iluminacion" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                      <option value="luz de día brillante">Luz de día brillante</option>
                                      <option value="golden hour (atardecer)">Golden hour (atardecer)</option>
                                      <option value="iluminación nocturna elegante">Iluminación nocturna elegante</option>
                                 </select>
-                                <button type="submit" class="w-full primary-bg dark:primary-bg text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt</button>
+                                <button type="submit" class="w-full bg-[var(--color-primary)] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt</button>
                             </form>
                         </div>
 
                         <!-- Resultado del Prompt y Nano-Banana -->
                         <div class="space-y-6">
-                            <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                            <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                                 <h3 class="text-lg font-semibold mb-2">Prompt de Imagen Generado</h3>
                                 <div class="relative">
-                                    <pre id="prompt-imagen-resultado" class="whitespace-pre-wrap p-4 rounded-md light-mode-bg dark:dark-mode-bg min-h-[100px]"></pre>
+                                    <pre id="prompt-imagen-resultado" class="whitespace-pre-wrap p-4 rounded-md bg-[var(--color-bg)] min-h-[100px]"></pre>
                                      <button onclick="copyToClipboard('prompt-imagen-resultado')" class="absolute top-2 right-2 p-1.5 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                                     </button>
                                 </div>
                             </div>
-                            <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                            <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                                  <div class="flex justify-between items-center mb-2">
                                     <h3 class="text-lg font-semibold">Imagen con Nano-Banana</h3>
-                                    <button id="btn-nanobanana-imagen" class="secondary-bg dark:secondary-bg text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50" disabled>Generar Imagen</button>
+                                    <button id="btn-nanobanana-imagen" class="bg-[var(--color-secondary)] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-50" disabled>Generar Imagen</button>
                                 </div>
-                                <div id="nanobanana-imagen-resultado-container" class="relative p-4 rounded-md light-mode-bg dark:dark-mode-bg min-h-[250px] flex items-center justify-center">
+                                <div id="nanobanana-imagen-resultado-container" class="relative p-4 rounded-md bg-[var(--color-bg)] min-h-[250px] flex items-center justify-center">
                                     <div id="nanobanana-imagen-loader" class="absolute inset-0 flex items-center justify-center hidden">
                                         <div class="loader w-8 h-8 border-4 border-gray-200 dark:border-gray-600 rounded-full"></div>
                                     </div>
@@ -248,38 +224,38 @@
                 <div id="panel-video" class="hidden space-y-6">
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Formulario de Video -->
-                        <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                        <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                             <h2 class="text-xl font-semibold mb-4">Elabora el guion para tu video</h2>
                             <form id="form-video" class="space-y-4">
-                               <select id="video-tipo" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                               <select id="video-tipo" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="tour de propiedad">Tour de la propiedad</option>
                                     <option value="guía del barrio">Guía del barrio</option>
                                     <option value="actualización del mercado">Actualización del mercado</option>
                                 </select>
-                                 <select id="video-plataforma" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                 <select id="video-plataforma" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="Instagram Reels">Instagram Reels</option>
                                     <option value="TikTok">TikTok</option>
                                     <option value="YouTube Shorts">YouTube Shorts</option>
                                     <option value="YouTube (largo)">YouTube (formato largo)</option>
                                 </select>
-                                <select id="video-tono" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <select id="video-tono" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400">
                                     <option value="profesional y informativo">Profesional e informativo</option>
                                     <option value="casual y cercano">Casual y cercano</option>
                                     <option value="energético y vendedor">Energético y vendedor</option>
                                 </select>
-                                <textarea id="video-puntos-clave" rows="4" placeholder="Puntos clave a mencionar (ej. Destacar la cocina renovada, la cercanía a colegios, oferta por tiempo limitado...)" class="w-full p-2 rounded-md light-mode-bg dark:dark-mode-bg border light-mode-border dark:dark-mode-border focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
-                                <button type="submit" class="w-full primary-bg dark:primary-bg text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt de Video</button>
+                                <textarea id="video-puntos-clave" rows="4" placeholder="Puntos clave a mencionar (ej. Destacar la cocina renovada, la cercanía a colegios, oferta por tiempo limitado...)" class="w-full p-2 rounded-md bg-[var(--color-bg)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+                                <button type="submit" class="w-full bg-[var(--color-primary)] text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity">Generar Prompt de Video</button>
                             </form>
                         </div>
 
                         <!-- Resultado del Prompt de Video -->
-                        <div class="light-mode-card dark:dark-mode-card p-6 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border">
+                        <div class="bg-[var(--color-card)] p-6 rounded-lg shadow-sm border border-[var(--color-border)]">
                             <h3 class="text-lg font-semibold mb-2">Prompt de Video Generado</h3>
                             <div class="relative">
-                                <pre id="prompt-video-resultado" class="whitespace-pre-wrap p-4 rounded-md light-mode-bg dark:dark-mode-bg min-h-[300px]"></pre>
+                                <pre id="prompt-video-resultado" class="whitespace-pre-wrap p-4 rounded-md bg-[var(--color-bg)] min-h-[300px]"></pre>
                                  <button onclick="copyToClipboard('prompt-video-resultado')" class="absolute top-2 right-2 p-1.5 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                                </button>
+                                 </button>
                             </div>
                         </div>
                     </div>
@@ -297,7 +273,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="light-mode-card dark:dark-mode-card mt-auto py-4">
+        <footer class="bg-[var(--color-card)] mt-auto py-4">
             <div class="container mx-auto px-4 text-center text-gray-500 dark:text-gray-400">
                 <p>&copy; 2025 Hecho por Círculo Inmobiliario Secreto</p>
             </div>
@@ -422,7 +398,7 @@ El video no debe durar más de ${plataforma.includes('Shorts') || plataforma.inc
             });
 
             // --- API Calls ---
-            const apiKey = ""; // API Key will be handled by the environment
+            const apiKey = "AIzaSyBqCObZZZ0LfltR-eCvD8WhdBfgnNd3Izo"; // API Key will be handled by the environment
 
             // Gemini Text Generation
             document.getElementById('btn-gemini-texto').addEventListener('click', async () => {
@@ -527,7 +503,7 @@ El video no debe durar más de ${plataforma.includes('Shorts') || plataforma.inc
 
                 saved.forEach((item, index) => {
                     const div = document.createElement('div');
-                    div.className = 'light-mode-card dark:dark-mode-card p-4 rounded-lg shadow-sm border light-mode-border dark:dark-mode-border flex justify-between items-start';
+                    div.className = 'bg-[var(--color-card)] p-4 rounded-lg shadow-sm border border-[var(--color-border)] flex justify-between items-start';
                     
                     const typeColor = item.type === 'Texto' ? 'text-blue-400' : item.type === 'Imagen' ? 'text-purple-400' : 'text-green-400';
 
